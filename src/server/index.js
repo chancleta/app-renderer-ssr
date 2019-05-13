@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import express from 'express';
 import { matchRoutes } from 'react-router-config';
 import Routes from '../client/Routes';
@@ -21,7 +21,7 @@ app.get('*', async (req, res) => {
     });
   await Promise.all(pendingPromises);
   const context = {};
-  const content = reactRenderer(req, store, context);
+  const content = await reactRenderer(req, store, context);
   if (context.url) {
     return res.redirect(301, context.url);
   }

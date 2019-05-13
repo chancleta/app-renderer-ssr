@@ -2,12 +2,14 @@ import React from 'react';
 import { StaticRouter } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
+import ejs from 'ejs';
+import path from 'path';
 import serialize from 'serialize-javascript';
 import { Helmet } from 'react-helmet';
 import Routes from '../client/Routes';
 import { renderRoutes } from 'react-router-config';
 
-export default (req, store, context) => {
+export default async (req, store, context) => {
   const content = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.path} context={context}>
@@ -16,20 +18,21 @@ export default (req, store, context) => {
     </Provider>,
   );
   const helmet = Helmet.renderStatic();
+  ejs.delimiter = '$';
+  const title = helmet.title.toString();
+  const meta = helmet.meta.toString();
+  const initialState = serialize(store.getState());
+  try {
+    return await ejs.renderFile(
+      path.resolve(__dirname, './../build/index.html'),
+      {
+        title,
+        meta,
+        initialState,
+        content,
+      });
+  } catch (e) {
+    throw e.toString();
+  }
 
-  return `
-  <html>
-    <head>
-        ${helmet.title.toString()}
-        ${helmet.meta.toString()}
-    </head>
-    <body>
-        <div id="root">${content}</div>
-        <script>
-            window.__INITIAL_STATE__ = ${serialize(store.getState())}
-        </script>
-        <script src="bundle.js" ></script>
-    </body>
-  </html>
-  `;
 }
