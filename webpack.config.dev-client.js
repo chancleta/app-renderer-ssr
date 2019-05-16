@@ -1,5 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const LiveReloadPlugin = require('webpack-livereload-plugin');
 
 const config = {
   // Tell webpack the root/entry file of our server application
@@ -15,6 +16,10 @@ const config = {
       // Options similar to the same options in webpackOptions.output
       // both options are optional
       filename: 'main.css',
+    }),
+    new LiveReloadPlugin({
+      delay: 2000,
+      appendScriptTag: true,
     }),
   ],
   module: {
