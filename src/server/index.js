@@ -1,4 +1,5 @@
 import '@babel/polyfill';
+import 'text-encoding';
 import express from 'express';
 import { matchRoutes } from 'react-router-config';
 import Routes from '../client/Routes';

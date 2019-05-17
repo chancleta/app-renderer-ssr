@@ -20,6 +20,7 @@ const config = {
     new LiveReloadPlugin({
       delay: 2000,
       appendScriptTag: true,
+      port: 0,
     }),
   ],
   module: {
