@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react'
 
 const NotFound404 = ({ staticContext = {} }) => {
-  staticContext.notFound = true;
-  return <h1>404</h1>;
-};
+    staticContext.notFound = true
+    return <h1>404</h1>
+}
 
-export default { component: NotFound404 };
+export default { component: NotFound404 }
