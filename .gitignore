@@ -3,3 +3,5 @@ idea/
 *.iml
 build/
 public/
+dist/
+prettier.config.js
