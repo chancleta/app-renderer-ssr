@@ -1,9 +1,10 @@
-import '@babel/polyfill'
-import express from 'express'
-import { matchRoutes } from 'react-router-config'
-import Routes from '../client/Routes'
-import reactRenderer from './reactRenderer'
-import configureStore from './configureStore'
+import "@babel/polyfill";
+import 'text-encoding';
+import express from "express";
+import { matchRoutes } from "react-router-config";
+import Routes from "../client/Routes";
+import reactRenderer from "./reactRenderer";
+import configureStore from "./configureStore";
 
 const app = express()
 
